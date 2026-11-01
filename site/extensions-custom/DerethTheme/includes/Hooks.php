@@ -2,8 +2,8 @@
 
 /**
  * Loads DerethTheme's styles and script on pages rendered with Citizen, and
- * supplies the text of Citizen's footer. Other skins (legacy Vector, the
- * default) are left untouched.
+ * supplies the text of Citizen's footer. Other skins (e.g. legacy Vector via
+ * ?useskin=vector) are left untouched.
  */
 class DerethThemeHooks {
 

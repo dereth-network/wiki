@@ -182,17 +182,17 @@ $wgGroupPermissions['sysop']['move'] = true;
 $wgGroupPermissions['sysop']['movefile'] = true;
 $wgGroupPermissions['sysop']['purge'] = true;
 
-## Skins -- legacy Vector stays the default: MediaWiki:Common.css,
-## MediaWiki:Common.js and MenuSidebar's flyouts are written against it.
+## Skins -- Citizen is the default (below). MediaWiki:Common.css/.js and
+## MenuSidebar were written for legacy Vector; DerethTheme adapts them.
 wfLoadSkin( 'Vector' );
 wfLoadSkin( 'MonoBook' );
 wfLoadSkin( 'Timeless' );
 wfLoadSkin( 'MinervaNeue' );
-# Citizen: modern layout with built-in light/dark/auto themes. Preview any
-# page with ?useskin=citizen; make it the default once templates look right
-# in both themes. (It switches the DarkMode extension off for itself.)
+# Citizen (the default): modern layout with built-in light/dark/auto themes.
+# It switches the DarkMode extension off for itself; legacy Vector, with
+# DarkMode, is still there via ?useskin=vector.
 wfLoadSkin( 'Citizen' );
-$wgDefaultSkin = 'vector';
+$wgDefaultSkin = 'citizen';
 # Citizen-only fixes for this wiki's templates: dark-mode colours, wide
 # tables (extensions-custom/DerethTheme).
 wfLoadExtension( 'DerethTheme' );

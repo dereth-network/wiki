@@ -26,8 +26,8 @@ On the VPS this repo is cloned to `/srv/wiki`, with the content in
 - `site/UPGRADE-NOTES.md`: what changed from the original 1.41 Docker
   package, and why
 
-Skins: legacy Vector is the default. Citizen (light/dark/auto) is installed
-for preview. Add `?useskin=citizen` to any page URL to try it.
+Skin: Citizen, with light/dark/auto themes. The old look (legacy Vector) is
+still available by adding `?useskin=vector` to any page URL.
 
 ## License
 

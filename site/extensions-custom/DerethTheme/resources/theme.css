@@ -1,5 +1,21 @@
 /* Citizen-only layout fixes, both themes. Dark-mode colours are in dark.css. */
 
+/* MenuSidebar's flyouts open sideways out of Citizen's drawer, which clips
+ * its contents (a scrolling inner panel, contain: content, and an
+ * open/close clip-path), cutting longer submenus off at the drawer's bottom
+ * edge. Where the drawer fits on screen anyway, let them overflow it while
+ * it's open: the clip is widened to the right and downward rather than
+ * removed, so Citizen's open/close animation still works. */
+@media screen and ( min-width: 720px ) and ( min-height: 500px ) {
+	.citizen-dropdown-details[ open ] + .citizen-drawer__card.citizen-menu__card {
+		contain: none;
+		clip-path: inset( 0 -100vw -100vh 0 );
+	}
+	.citizen-drawer__card .citizen-menu__card-content {
+		overflow: visible;
+	}
+}
+
 /* Scroller for layout tables wider than the article (see theme.js). */
 .dereth-overflow {
 	max-width: 100%;
