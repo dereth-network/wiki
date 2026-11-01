@@ -16,6 +16,17 @@
 	}
 }
 
+/* Phones: infobox tables float right (style="float:right" or align="right")
+ * at nearly the full screen width, squeezing the article into a sliver
+ * beside them. Stack them above the text instead. */
+@media screen and ( max-width: 720px ) {
+	.mw-parser-output table:is( [ align="right" i ], [ align="left" i ], [ style*="float" i ] ) {
+		float: none !important;
+		margin: 0 auto 1em !important;
+		max-width: 100%;
+	}
+}
+
 /* Scroller for layout tables wider than the article (see theme.js). */
 .dereth-overflow {
 	max-width: 100%;

@@ -193,6 +193,9 @@ wfLoadSkin( 'MinervaNeue' );
 # DarkMode, is still there via ?useskin=vector.
 wfLoadSkin( 'Citizen' );
 $wgDefaultSkin = 'citizen';
+# Dark by default, like dereth.network; visitors can switch to the light
+# (parchment) or auto theme in Citizen's preferences menu.
+$wgCitizenThemeDefault = 'dark';
 # Citizen-only fixes for this wiki's templates: dark-mode colours, wide
 # tables (extensions-custom/DerethTheme).
 wfLoadExtension( 'DerethTheme' );

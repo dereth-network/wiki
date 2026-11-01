@@ -2,7 +2,7 @@
 	"name": "DerethTheme",
 	"version": "1.0.0",
 	"author": "wiki.dereth.network",
-	"description": "Makes the ACCPP Wiki's templates work with the Citizen skin: dark-mode colours for their hard-coded light backgrounds, scrolling for over-wide layout tables, and the footer text.",
+	"description": "The dereth.network look for the Citizen skin, and fixes that make the ACCPP Wiki's templates work with it: dark-mode colours, wide-table scrolling, stacked infoboxes on phones, and the footer text.",
 	"license-name": "Unlicense",
 	"type": "other",
 	"requires": {
@@ -21,7 +21,7 @@
 	},
 	"ResourceModules": {
 		"ext.derethTheme.styles": {
-			"styles": [ "theme.css", "dark.css" ]
+			"styles": [ "dereth.css", "theme.css", "dark.css" ]
 		},
 		"ext.derethTheme": {
 			"packageFiles": [ "theme.js" ]

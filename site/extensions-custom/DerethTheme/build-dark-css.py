@@ -33,6 +33,11 @@ TINTED = [
     "#cca3a3", "#ccc5a3", "#b1cca3", "#a3becc", "#c5a3cc", "#ccb6a3",
 ]
 
+# Light-grey inline borders (box outlines, the nav bar) -> Citizen's border
+# colour, which the dereth look makes a gold hairline.
+LIGHT_BORDERS = ["#b0b5b8", "#aaaaaa", "#aaa", "#a3b0bf", "#a2a9b1", "#c0c0c0", "silver",
+                 "#c8ccd1", "#cccccc", "#ccc", "#dddddd", "#ddd", "#e5e5e5", "#eaecf0"]
+
 # Inline text colours that are only readable on a light background.
 DARK_TEXT = ["#000", "#000000", "black", "#111", "#111111", "#222", "#222222", "#333", "#333333"]
 
@@ -95,6 +100,16 @@ def background_selectors(colours):
     return sels
 
 
+def border_selectors(colours):
+    sels = []
+    for c in colours:
+        for style in ("solid", "dashed", "dotted"):
+            sels.append(f'[style*="{style}\\000020{c}" i]')
+        for sep in SEPARATORS:
+            sels.append(f'[style*="border-color{sep}{c}" i]')
+    return sels
+
+
 def text_selectors(colours):
     sels = []
     for c in colours:
@@ -121,6 +136,7 @@ def emit_state(prefix):
         out.append(rule(prefix, background_selectors([c]),
                         f"background-color: color-mix(in srgb, {c} 15%, var(--color-surface-1)) !important;"))
     out.append(rule(prefix, text_selectors(DARK_TEXT), "color: var(--color-base) !important;"))
+    out.append(rule(prefix, border_selectors(LIGHT_BORDERS), "border-color: var(--border-color-base) !important;"))
     # <font color="#f9f9f9">___</font> and friends: spacer text coloured to
     # match its box, i.e. meant to be invisible. Keep it matching the box.
     out.append(rule(prefix, ['font[color="#f9f9f9" i]'], "color: var(--color-surface-1) !important;"))

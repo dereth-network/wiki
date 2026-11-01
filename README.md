@@ -17,17 +17,18 @@ On the VPS this repo is cloned to `/srv/wiki`, with the content in
 - `site/LocalSettings.php`: MediaWiki configuration; everything site-specific
   comes from `MW_*` environment variables
 - `site/extensions-custom/`: MenuSidebar (the flyout sidebar menu), YouTubeTag,
-  and DerethTheme (Citizen support: dark-mode colours for the templates,
-  wide-table scrolling, footer text; regenerate its `dark.css` with
-  `build-dark-css.py`)
+  and DerethTheme (the dereth.network look for Citizen, plus dark-mode
+  colours for the templates, wide-table scrolling and footer text;
+  regenerate its `dark.css` with `build-dark-css.py`)
 - `site/assets/`: logo and favicon
 - `site/scripts/`: the 1.41 → 1.43 upgrade and a page smoke-test
   (`site/scripts/check-pages.sh <base-url>`)
 - `site/UPGRADE-NOTES.md`: what changed from the original 1.41 Docker
   package, and why
 
-Skin: Citizen, with light/dark/auto themes. The old look (legacy Vector) is
-still available by adding `?useskin=vector` to any page URL.
+Skin: Citizen, styled after dereth.network (dark by default, with a
+parchment light theme in Citizen's preferences menu). The old look (legacy
+Vector) is still available by adding `?useskin=vector` to any page URL.
 
 ## License
 
@@ -39,5 +40,9 @@ whatever you want with it, no credit needed. Except:
 - `site/extensions-custom/YouTubeTag/`: from the ACCPP release,
   GPL-2.0-or-later.
 - `site/assets/`: the ACCPP logo and favicon, which belong to ACCPP.
+- `site/extensions-custom/DerethTheme/resources/fonts/`: Cinzel and
+  EB Garamond, SIL Open Font License (see the `OFL-*.txt` files there).
+- `site/extensions-custom/DerethTheme/resources/art/`: artwork from
+  dereth.network.
 - The wiki's content (not in this repo) is CC BY-SA 3.0, and the game's
   images belong to their owners.

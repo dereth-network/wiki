@@ -1,0 +1,406 @@
+/*
+ * The dereth.network look for Citizen: ink and stone panels over the
+ * obsidian-bridge vista, gold hairlines and pixel frames, Cinzel for
+ * headings and labels, EB Garamond for text. Palette and frames follow
+ * dereth.network's own stylesheet.
+ *
+ * Dark (the default) is the dereth.network look; light is a parchment
+ * variant with the same type and golds. Theme tokens are set per theme
+ * below; everything after them only uses the --dereth-* tokens.
+ *
+ * Citizen sets its tokens on `:root.skin-theme-clientpref-*`, and its
+ * styles load after this module, so token blocks use `html:root` to win
+ * on specificity.
+ */
+
+/* Fonts: SIL Open Font License, see fonts/OFL-*.txt. Latin subsets. */
+@font-face {
+	font-family: 'Cinzel';
+	src: url( fonts/Cinzel.woff2 ) format( 'woff2' );
+	font-weight: 400 900;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'EB Garamond';
+	src: url( fonts/EBGaramond.woff2 ) format( 'woff2' );
+	font-weight: 400 800;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: 'EB Garamond';
+	src: url( fonts/EBGaramond-Italic.woff2 ) format( 'woff2' );
+	font-weight: 400 800;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* ---- Theme-independent tokens ------------------------------------------ */
+
+html:root {
+	--dereth-px: 3px;
+	--dereth-radius: 10px;
+	--dereth-display: 'Cinzel', 'Trajan Pro', Georgia, serif;
+	--dereth-body: 'EB Garamond', Garamond, Georgia, serif;
+	--font-family-citizen-base: 'EB Garamond', Garamond;
+	--font-family-citizen-serif: 'EB Garamond', Garamond;
+	--border-radius-medium: var( --dereth-radius );
+}
+
+/* ---- Dark: dereth.network ---------------------------------------------- */
+
+html:root.skin-theme-clientpref-night {
+	--dereth-ink: #0c0a10;
+	--dereth-stone: #17141d;
+	--dereth-stone-2: #211c29;
+	--dereth-stone-3: #2d2636;
+	--dereth-gold-dark: #6b4e22;
+	--dereth-gold: #b58a3c;
+	--dereth-gold-bright: #e9c77a;
+	--dereth-text: #efe6d2;
+	--dereth-muted: #a99f8b;
+	--dereth-faint: #8a8170;
+	--dereth-line: rgba( 233, 199, 122, 0.22 );
+	--dereth-line-strong: rgba( 233, 199, 122, 0.5 );
+	--dereth-glass: rgba( 20, 17, 25, 0.86 );
+	--dereth-heading: var( --dereth-gold-bright );
+	--dereth-dither: repeating-conic-gradient( rgba( 255, 240, 210, 0.022 ) 0% 25%, transparent 0% 50% ) 0 0 / 6px 6px;
+	--dereth-vista: linear-gradient( to bottom, #0c0a1099, #0c0a1000 30% ), linear-gradient( to top, #0c0a10e6, #0c0a1059 55%, #0c0a1000 80% ), linear-gradient( to right, #0c0a108c, #0c0a1000 35% ), url( art/obsidian-bridge.webp ) center / cover no-repeat;
+
+	--color-surface-0: #0c0a10;
+	--color-surface-1: #17141d;
+	--color-surface-2: #211c29;
+	--color-surface-3: #2d2636;
+	--color-surface-4: #3a3245;
+	--color-base: #efe6d2;
+	--color-emphasized: #fff7e6;
+	--color-subtle: #a99f8b;
+	--color-placeholder: #8a8170;
+	--color-progressive: #e9c77a;
+	--color-progressive--hover: #fff4d6;
+	--color-progressive--active: #b58a3c;
+	--color-visited: #cfa75c;
+	--color-destructive: #ec8a76;
+	--border-color-base: rgba( 233, 199, 122, 0.22 );
+	--border-color-subtle: rgba( 233, 199, 122, 0.12 );
+	--border-color-interactive: rgba( 233, 199, 122, 0.5 );
+	--background-color-button-quiet--hover: rgba( 233, 199, 122, 0.1 );
+	--background-color-button-quiet--active: rgba( 233, 199, 122, 0.18 );
+	color-scheme: dark;
+}
+@media screen and ( prefers-color-scheme: dark ) {
+	html:root.skin-theme-clientpref-os {
+		--dereth-ink: #0c0a10;
+		--dereth-stone: #17141d;
+		--dereth-stone-2: #211c29;
+		--dereth-stone-3: #2d2636;
+		--dereth-gold-dark: #6b4e22;
+		--dereth-gold: #b58a3c;
+		--dereth-gold-bright: #e9c77a;
+		--dereth-text: #efe6d2;
+		--dereth-muted: #a99f8b;
+		--dereth-faint: #8a8170;
+		--dereth-line: rgba( 233, 199, 122, 0.22 );
+		--dereth-line-strong: rgba( 233, 199, 122, 0.5 );
+		--dereth-glass: rgba( 20, 17, 25, 0.86 );
+		--dereth-heading: var( --dereth-gold-bright );
+		--dereth-dither: repeating-conic-gradient( rgba( 255, 240, 210, 0.022 ) 0% 25%, transparent 0% 50% ) 0 0 / 6px 6px;
+		--dereth-vista: linear-gradient( to bottom, #0c0a1099, #0c0a1000 30% ), linear-gradient( to top, #0c0a10e6, #0c0a1059 55%, #0c0a1000 80% ), linear-gradient( to right, #0c0a108c, #0c0a1000 35% ), url( art/obsidian-bridge.webp ) center / cover no-repeat;
+
+		--color-surface-0: #0c0a10;
+		--color-surface-1: #17141d;
+		--color-surface-2: #211c29;
+		--color-surface-3: #2d2636;
+		--color-surface-4: #3a3245;
+		--color-base: #efe6d2;
+		--color-emphasized: #fff7e6;
+		--color-subtle: #a99f8b;
+		--color-placeholder: #8a8170;
+		--color-progressive: #e9c77a;
+		--color-progressive--hover: #fff4d6;
+		--color-progressive--active: #b58a3c;
+		--color-visited: #cfa75c;
+		--color-destructive: #ec8a76;
+		--border-color-base: rgba( 233, 199, 122, 0.22 );
+		--border-color-subtle: rgba( 233, 199, 122, 0.12 );
+		--border-color-interactive: rgba( 233, 199, 122, 0.5 );
+		--background-color-button-quiet--hover: rgba( 233, 199, 122, 0.1 );
+		--background-color-button-quiet--active: rgba( 233, 199, 122, 0.18 );
+		color-scheme: dark;
+	}
+}
+
+/* ---- Light: parchment -------------------------------------------------- */
+
+html:root.skin-theme-clientpref-day {
+	--dereth-ink: #2a2218;
+	--dereth-stone: #f3ead7;
+	--dereth-stone-2: #ebe0c8;
+	--dereth-stone-3: #e2d5b8;
+	--dereth-gold-dark: #6b4e22;
+	--dereth-gold: #b58a3c;
+	--dereth-gold-bright: #8a6420;
+	--dereth-text: #2a2218;
+	--dereth-muted: #6e604a;
+	--dereth-faint: #857660;
+	--dereth-line: rgba( 107, 78, 34, 0.28 );
+	--dereth-line-strong: rgba( 107, 78, 34, 0.55 );
+	--dereth-glass: rgba( 248, 241, 226, 0.94 );
+	--dereth-heading: #6b4e22;
+	--dereth-dither: repeating-conic-gradient( rgba( 107, 78, 34, 0.025 ) 0% 25%, transparent 0% 50% ) 0 0 / 6px 6px;
+	--dereth-vista: linear-gradient( to bottom, #e9dfc7, #e2d5b8 );
+
+	--color-surface-0: #e9dfc7;
+	--color-surface-1: #f3ead7;
+	--color-surface-2: #ebe0c8;
+	--color-surface-3: #e2d5b8;
+	--color-surface-4: #d6c7a6;
+	--color-base: #2a2218;
+	--color-emphasized: #120e09;
+	--color-subtle: #6e604a;
+	--color-placeholder: #857660;
+	--color-progressive: #7a5418;
+	--color-progressive--hover: #4d340d;
+	--color-progressive--active: #4d340d;
+	--color-visited: #6b4a1e;
+	--color-destructive: #a8321f;
+	--border-color-base: rgba( 107, 78, 34, 0.28 );
+	--border-color-subtle: rgba( 107, 78, 34, 0.16 );
+	--border-color-interactive: rgba( 107, 78, 34, 0.55 );
+	--background-color-button-quiet--hover: rgba( 107, 78, 34, 0.08 );
+	--background-color-button-quiet--active: rgba( 107, 78, 34, 0.15 );
+	color-scheme: light;
+}
+@media screen and ( prefers-color-scheme: light ) {
+	html:root.skin-theme-clientpref-os {
+		--dereth-ink: #2a2218;
+		--dereth-stone: #f3ead7;
+		--dereth-stone-2: #ebe0c8;
+		--dereth-stone-3: #e2d5b8;
+		--dereth-gold-dark: #6b4e22;
+		--dereth-gold: #b58a3c;
+		--dereth-gold-bright: #8a6420;
+		--dereth-text: #2a2218;
+		--dereth-muted: #6e604a;
+		--dereth-faint: #857660;
+		--dereth-line: rgba( 107, 78, 34, 0.28 );
+		--dereth-line-strong: rgba( 107, 78, 34, 0.55 );
+		--dereth-glass: rgba( 248, 241, 226, 0.94 );
+		--dereth-heading: #6b4e22;
+		--dereth-dither: repeating-conic-gradient( rgba( 107, 78, 34, 0.025 ) 0% 25%, transparent 0% 50% ) 0 0 / 6px 6px;
+		--dereth-vista: linear-gradient( to bottom, #e9dfc7, #e2d5b8 );
+
+		--color-surface-0: #e9dfc7;
+		--color-surface-1: #f3ead7;
+		--color-surface-2: #ebe0c8;
+		--color-surface-3: #e2d5b8;
+		--color-surface-4: #d6c7a6;
+		--color-base: #2a2218;
+		--color-emphasized: #120e09;
+		--color-subtle: #6e604a;
+		--color-placeholder: #857660;
+		--color-progressive: #7a5418;
+		--color-progressive--hover: #4d340d;
+		--color-progressive--active: #4d340d;
+		--color-visited: #6b4a1e;
+		--color-destructive: #a8321f;
+		--border-color-base: rgba( 107, 78, 34, 0.28 );
+		--border-color-subtle: rgba( 107, 78, 34, 0.16 );
+		--border-color-interactive: rgba( 107, 78, 34, 0.55 );
+		--background-color-button-quiet--hover: rgba( 107, 78, 34, 0.08 );
+		--background-color-button-quiet--active: rgba( 107, 78, 34, 0.15 );
+		color-scheme: light;
+	}
+}
+
+/* ---- Page: vista behind glass panels ----------------------------------- */
+
+/* The vista sits on a fixed layer of its own, so content images don't
+ * inherit image-rendering: pixelated. */
+body.skin-citizen {
+	background: var( --dereth-ink );
+}
+body.skin-citizen::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -1;
+	background: var( --dereth-vista );
+	image-rendering: pixelated;
+	pointer-events: none;
+}
+.skin-citizen .citizen-page-container {
+	background: transparent;
+}
+
+/* The article: one glass panel holding title, body and contents. */
+.skin-citizen main.mw-body {
+	margin: 0 clamp( 8px, 2vw, 24px ) 24px;
+	padding-bottom: 8px;
+	background: var( --dereth-glass ) var( --dereth-dither );
+	border: 1px solid var( --dereth-line );
+	border-radius: var( --dereth-radius );
+}
+
+/* The site-wide nav bar (MediaWiki:Anonnotice) as a slimmer panel. */
+.skin-citizen .citizen-sitenotice-container {
+	padding: 16px clamp( 8px, 2vw, 24px ) 0;
+	background: transparent;
+}
+.skin-citizen #localNotice > .anonnotice > table {
+	background: var( --dereth-glass ) var( --dereth-dither ) !important;
+	border: 1px solid var( --dereth-line ) !important;
+	border-radius: var( --dereth-radius );
+	font-family: var( --dereth-display );
+	font-size: 0.9rem !important;
+	letter-spacing: 0.04em;
+}
+
+/* Left icon rail and sticky header */
+.skin-citizen .citizen-header {
+	background: var( --dereth-glass ) var( --dereth-dither );
+	border-color: var( --dereth-line );
+}
+.skin-citizen .citizen-sticky-header-background {
+	background: var( --dereth-glass );
+	border-color: var( --dereth-line );
+}
+/* (Not the logo button: Citizen keeps its home icon transparent until hover.) */
+.skin-citizen .citizen-header .citizen-dropdown-summary {
+	color: var( --dereth-gold-bright );
+}
+
+/* Dropdown cards (menu drawer, search, preferences) */
+.skin-citizen .citizen-menu__card {
+	background-color: var( --dereth-glass );
+	border-color: var( --dereth-line-strong );
+}
+.skin-citizen .citizen-menu__heading,
+.skin-citizen .citizen-drawer__siteinfo .mw-logo-wordmark {
+	font-family: var( --dereth-display );
+	letter-spacing: 0.1em;
+	color: var( --dereth-heading );
+}
+
+/* ---- Type --------------------------------------------------------------- */
+
+.skin-citizen .mw-body-content {
+	font-family: var( --dereth-body );
+	font-size: 1.125rem;
+	line-height: 1.55;
+}
+
+.skin-citizen .firstHeading,
+.skin-citizen .citizen-sticky-header-page-info {
+	font-family: var( --dereth-display );
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	color: var( --dereth-text );
+}
+.skin-citizen #siteSub {
+	font-family: var( --dereth-display );
+	letter-spacing: 0.08em;
+	color: var( --dereth-muted );
+}
+
+/* Section headings: the dereth.network panel heading. */
+.skin-citizen .mw-body-content h2,
+.skin-citizen .mw-body-content .mw-heading2 {
+	font-family: var( --dereth-display );
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var( --dereth-heading );
+}
+.skin-citizen .mw-body-content .mw-heading2 {
+	border-bottom: 1px solid var( --dereth-line );
+}
+.skin-citizen .mw-body-content h3,
+.skin-citizen .mw-body-content h4,
+.skin-citizen .mw-body-content h5,
+.skin-citizen .mw-body-content h6 {
+	font-family: var( --dereth-display );
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	color: var( --dereth-heading );
+}
+
+/* Table of contents and page-info labels */
+.skin-citizen .citizen-toc__header,
+.skin-citizen .citizen-page-aside .page-info__label,
+.skin-citizen .page-info__label {
+	font-family: var( --dereth-display );
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var( --dereth-heading );
+}
+
+/* Links */
+.skin-citizen .mw-body-content a {
+	text-underline-offset: 3px;
+}
+.skin-citizen .mw-body-content a:hover {
+	color: var( --color-progressive--hover );
+}
+
+/* ---- Page actions: dereth.network's framed buttons --------------------- */
+
+.skin-citizen .citizen-page-actions__tabs .cdx-button,
+.skin-citizen .citizen-page-actions__tabs a {
+	min-height: 36px;
+	padding: 0 14px;
+	border: calc( var( --dereth-px ) * 2 ) solid transparent;
+	border-image: url( art/frame-quiet.svg ) 2 / calc( var( --dereth-px ) * 2 ) stretch;
+	border-radius: 0;
+	background: var( --dereth-stone-2 ) var( --dereth-dither );
+	font: 600 12px var( --dereth-display );
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var( --dereth-gold-bright );
+	image-rendering: pixelated;
+}
+.skin-citizen .citizen-page-actions__tabs .cdx-button:hover,
+.skin-citizen .citizen-page-actions__tabs a:hover {
+	border-image-source: url( art/frame-lit.svg );
+	background-color: var( --dereth-stone-3 );
+	color: var( --color-emphasized );
+}
+
+/* ---- Content furniture --------------------------------------------------- */
+
+.skin-citizen .wikitable {
+	border-color: var( --dereth-line );
+}
+.skin-citizen .wikitable > * > tr > th {
+	font-family: var( --dereth-display );
+	font-weight: 600;
+	letter-spacing: 0.04em;
+}
+
+/* Footer: quiet, like dereth.network's .foot */
+.skin-citizen .citizen-footer {
+	background: transparent;
+	color: var( --dereth-faint );
+}
+.skin-citizen .citizen-footer__sitetitle {
+	font-family: var( --dereth-display );
+	letter-spacing: 0.06em;
+	color: var( --dereth-gold-bright );
+}
+.skin-citizen .citizen-footer a {
+	color: var( --dereth-muted );
+}
+.skin-citizen .citizen-footer a:hover {
+	color: var( --dereth-gold-bright );
+}
+
+::selection {
+	background: rgba( 181, 138, 60, 0.45 );
+}
+.skin-citizen :focus-visible {
+	outline: var( --dereth-px ) solid var( --dereth-gold-bright );
+	outline-offset: var( --dereth-px );
+}
+html {
+	scrollbar-color: var( --dereth-gold-dark ) var( --dereth-ink );
+}
