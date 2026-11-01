@@ -1,0 +1,19 @@
+{
+	"name": "YouTubeTag",
+	"version": "1.0.0",
+	"author": "ACCPP Wiki",
+	"url": "https://github.com/",
+	"description": "Renders <youtube>VIDEO_ID</youtube> (the tag used by acpedia.org and asheron.fandom.com) as an embedded YouTube player streamed from YouTube, plus a plain watch link. Nothing is hosted locally.",
+	"license-name": "GPL-2.0-or-later",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.35.0"
+	},
+	"AutoloadClasses": {
+		"YouTubeTagHooks": "YouTubeTag.hooks.php"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": "YouTubeTagHooks::onParserFirstCallInit"
+	},
+	"manifest_version": 2
+}

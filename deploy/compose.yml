@@ -1,0 +1,121 @@
+# ACCPP Wiki -- read-only public instance.
+#
+#   web          public, MW_READ_ONLY + SELECT-only DB user, listening on
+#                127.0.0.1:8088 -- point the VPS's existing Cloudflare Tunnel
+#                at http://127.0.0.1:8088
+#   admin        same image, read-write, started on demand with
+#                `--profile admin`, bound to 127.0.0.1:8089 (use an SSH tunnel)
+#   db           MariaDB 11.4 LTS; imports data/mediawiki-1.43.sql.gz on first start
+#   cloudflared  only with `--profile tunnel`, for a box that doesn't already
+#                run a tunnel
+#
+# All settings and secrets come from .env (see .env.example / gen-env.sh).
+name: wiki
+
+x-web: &web
+  build:
+    context: ..
+    dockerfile: deploy/Dockerfile
+  image: dereth-wiki:1.43.11
+  restart: unless-stopped
+  depends_on:
+    db:
+      condition: service_healthy
+  volumes:
+    # Long form so a wrong DATA_DIR fails loudly instead of Docker quietly
+    # creating an empty directory (and serving a wiki with no images).
+    - type: bind
+      source: ${DATA_DIR}/images
+      target: /var/www/html/wiki/images
+      bind:
+        create_host_path: false
+    - mw_cache:/var/cache/mediawiki
+  security_opt:
+    - no-new-privileges:true
+
+services:
+  web:
+    <<: *web
+    environment:
+      MW_SERVER: ${WIKI_SERVER}
+      MW_READ_ONLY: "This wiki is a read-only archive."
+      MW_DB_HOST: db
+      MW_DB_NAME: mediawiki
+      MW_DB_USER: wiki_ro
+      MW_DB_PASS: ${DB_RO_PASSWORD}
+      MW_SECRET_KEY: ${MW_SECRET_KEY}
+    ports:
+      - "127.0.0.1:8088:80"
+    networks: [backend, edge]
+
+  admin:
+    <<: *web
+    profiles: [admin]
+    restart: "no"
+    environment:
+      MW_SERVER: http://localhost:8089
+      MW_DB_HOST: db
+      MW_DB_NAME: mediawiki
+      MW_DB_USER: wiki_rw
+      MW_DB_PASS: ${DB_RW_PASSWORD}
+      MW_SECRET_KEY: ${MW_SECRET_KEY}
+    ports:
+      - "127.0.0.1:8089:80"
+    networks: [backend, edge]
+
+  db:
+    image: mariadb:11.4.13
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: mediawiki
+      MARIADB_USER: wiki_rw
+      MARIADB_PASSWORD: ${DB_RW_PASSWORD}
+      DB_RO_PASSWORD: ${DB_RO_PASSWORD}
+      MARIADB_AUTO_UPGRADE: "1"
+    command:
+      - --innodb-buffer-pool-size=384M
+      - --max-connections=40
+    volumes:
+      - db_data:/var/lib/mysql
+      - type: bind
+        source: ${DATA_DIR}/mediawiki-1.43.sql.gz
+        target: /docker-entrypoint-initdb.d/10-mediawiki.sql.gz
+        read_only: true
+        bind:
+          create_host_path: false
+      - type: bind
+        source: ./db-init/20-readonly-user.sh
+        target: /docker-entrypoint-initdb.d/20-readonly-user.sh
+        read_only: true
+        bind:
+          create_host_path: false
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      # The first start imports the full dump, which takes a while on a
+      # small VPS; the server isn't reachable until it's done.
+      start_period: 1h
+    networks: [backend]
+
+  cloudflared:
+    image: cloudflare/cloudflared:2026.10.1
+    profiles: [tunnel]
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on: [web]
+    networks: [edge]
+
+networks:
+  # No internet access for the database.
+  backend:
+    internal: true
+  edge: {}
+
+volumes:
+  db_data:
+  mw_cache:

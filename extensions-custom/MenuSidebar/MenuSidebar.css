@@ -1,0 +1,33 @@
+/* Ported verbatim from the live acpedia.org site's MenuSidebar flyout styles,
+ * so the modern skin's hover-dropdown behaves and looks the same. */
+
+/* MediaWiki core's own sidebar rule, #mw-panel div.portal div.body ul li
+ * { font-size: small }, matches every <li> regardless of nesting depth, and
+ * "small" is relative to the parent's already-shrunk font-size -- so it
+ * compounds at each flyout level (12px -> 9px -> 6.75px -> ...), making
+ * deeply-nested flyouts unreadably tiny. That core rule has higher
+ * selector specificity (an #id) than a plain .menuSidebar class rule can
+ * match, so !important is needed to actually win the cascade here. */
+.menuSidebar li,
+.menuSidebar a { font-size: 13px !important; }
+
+.menuSidebar ul { list-style: none; margin: 0px; padding: 0px; width: 8em; }
+.menuSidebar ul div { position: absolute; top: -1px !important; left: 100%; width: 100%; z-index: 100; }
+.menuSidebar ul ul { background-color: white; border: 1px solid rgb(170, 170, 170); margin-top: 5px; margin-bottom: 5px; z-index: 101; width: 12em; }
+.menuSidebar li { position: relative; margin: 1px; z-index: 102; }
+.menuSidebar a { font-weight: normal; display: block; border-width: 0px; border-style: solid; border-color: rgb(170, 170, 170); margin: 0px; padding: 1px 1px 1px 5px; color: rgb(0, 0, 255); text-decoration: none; }
+.menuSidebar a em { position: absolute; right: 4px; font-style: normal; }
+.menuSidebar li:hover, .menuSidebar a:hover { background: rgb(204, 204, 255); }
+.menuSidebar li.separator a:hover { background: white; }
+.menuSidebar li.separator a, .menuSidebar li.separator { line-height: 0px; height: 0px; font-size: 0px; }
+.menuSidebar ul li:last-child a { border-width: 0px; }
+.menuSidebar ul li div { display: none; }
+.menuSidebar ul li:hover div, .menuSidebar ul li div:hover { display: block; }
+.menuSidebar ul li:hover ul li div { display: none; }
+.menuSidebar ul li ul li:hover div, .menuSidebar ul li ul li div:hover { display: block; }
+.menuSidebar ul li ul li:hover ul li div { display: none; }
+.menuSidebar ul li ul li ul li:hover div, .menuSidebar ul li ul li ul li div:hover { display: block; }
+.menuSidebar ul li ul li ul li:hover ul li div { display: none; }
+
+/* Modern Vector clips portlet overflow; the flyouts need to escape it. */
+.vector-menu-content, .mw-portlet .vector-menu-content { overflow: visible !important; }

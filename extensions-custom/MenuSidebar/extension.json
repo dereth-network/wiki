@@ -1,0 +1,49 @@
+{
+	"name": "MenuSidebar",
+	"version": "0.6",
+	"author": [
+		"Wolfgang Stöttinger",
+		"ACCPP Wiki"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:CSS_MenuSidebar",
+	"description": "Renders MediaWiki:MenuSidebar as hover-flyout menus under the matching MediaWiki:Sidebar headings",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.43.0"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\MenuSidebar\\": "includes/"
+	},
+	"Hooks": {
+		"SkinAfterPortlet": "main",
+		"BeforePageDisplay": "main",
+		"PageSaveComplete": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\MenuSidebar\\Hooks",
+			"services": [
+				"RevisionLookup",
+				"ParserFactory",
+				"MainWANObjectCache"
+			]
+		}
+	},
+	"ResourceModules": {
+		"ext.menuSidebar.styles": {
+			"styles": "MenuSidebar.css"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "MenuSidebar"
+	},
+	"config": {
+		"ParseListItems": {
+			"value": false,
+			"description": "Run each menu item through the wikitext parser (allows [[links]], {{templates}}, images). Only MediaWiki: namespace editors can change the source page."
+		}
+	},
+	"manifest_version": 2
+}

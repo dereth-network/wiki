@@ -1,0 +1,10 @@
+User-agent: *
+# Search engines need the CSS/JS to render pages.
+Allow: /wiki/load.php
+# Articles at /wiki/Title are fine to crawl. Keep bots off the expensive,
+# endlessly-parameterised endpoints (histories, diffs, special pages, search).
+Disallow: /wiki/index.php
+Disallow: /wiki/api.php
+Disallow: /wiki/rest.php
+Disallow: /wiki/Special:
+Disallow: /wiki/*?
