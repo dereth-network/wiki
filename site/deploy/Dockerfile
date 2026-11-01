@@ -1,7 +1,7 @@
 # Read-only ACCPP Wiki on the official MediaWiki 1.43 LTS image (Debian,
 # PHP 8.3, Apache, ImageMagick + rsvg already included).
 #
-# Build from the repo root (site/):  docker compose -f deploy/compose.yml build
+# Build context is site/ (compose.yml sets it):  docker compose -f deploy/compose.yml build
 #
 # Code is baked into the image and never written at runtime; the only mounts
 # are the uploaded images (data/images) and a scratch cache volume.

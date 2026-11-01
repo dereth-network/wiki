@@ -1,2 +1,11 @@
-.secret_key
-deploy/.env
+# Wiki content (database dump + images, ~3.8 GB): kept outside git and
+# backed up separately. See site/deploy/README.md.
+/data/
+# Scratch space for site/scripts/upgrade-local.sh
+/work/
+# The original MediaWiki 1.41 offline release this was upgraded from
+/accppwiki.7z
+
+# Secrets
+site/.secret_key
+site/deploy/.env
