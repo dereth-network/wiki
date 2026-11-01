@@ -1,0 +1,31 @@
+{
+	"name": "DerethTheme",
+	"version": "1.0.0",
+	"author": "wiki.dereth.network",
+	"description": "Makes the ACCPP Wiki's templates work with the Citizen skin: dark-mode colours for their hard-coded light backgrounds, scrolling for over-wide layout tables, and the footer text.",
+	"license-name": "GPL-2.0-or-later",
+	"type": "other",
+	"requires": {
+		"MediaWiki": ">= 1.43.0"
+	},
+	"AutoloadClasses": {
+		"DerethThemeHooks": "includes/Hooks.php"
+	},
+	"Hooks": {
+		"BeforePageDisplay": "DerethThemeHooks::onBeforePageDisplay",
+		"MessagesPreLoad": "DerethThemeHooks::onMessagesPreLoad"
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "resources",
+		"remoteExtPath": "DerethTheme/resources"
+	},
+	"ResourceModules": {
+		"ext.derethTheme.styles": {
+			"styles": [ "theme.css", "dark.css" ]
+		},
+		"ext.derethTheme": {
+			"packageFiles": [ "theme.js" ]
+		}
+	},
+	"manifest_version": 2
+}

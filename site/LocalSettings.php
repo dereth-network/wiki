@@ -193,6 +193,9 @@ wfLoadSkin( 'MinervaNeue' );
 # in both themes. (It switches the DarkMode extension off for itself.)
 wfLoadSkin( 'Citizen' );
 $wgDefaultSkin = 'vector';
+# Citizen-only fixes for this wiki's templates: dark-mode colours, wide
+# tables (extensions-custom/DerethTheme).
+wfLoadExtension( 'DerethTheme' );
 
 ## Extensions
 wfLoadExtension( 'Cite' );

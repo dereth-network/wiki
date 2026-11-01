@@ -1,0 +1,21 @@
+/* Citizen-only layout fixes, both themes. Dark-mode colours are in dark.css. */
+
+/* Scroller for layout tables wider than the article (see theme.js). */
+.dereth-overflow {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+/* Template cells that keep a light colour in the dark theme (dye swatches,
+ * material colours) get dark text from theme.js. Harmless in the light
+ * theme. The never-present #dereth-boost lifts these to ID specificity so
+ * they beat dark.css's !important text rules. */
+:is( .dereth-on-light, #dereth-boost ) {
+	color: #202122 !important;
+}
+:is( .dereth-on-light, #dereth-boost ) a:not( .new ) {
+	color: #0645ad !important;
+}
+:is( .dereth-on-light, #dereth-boost ) a.new {
+	color: #d73333 !important;
+}

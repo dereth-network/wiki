@@ -16,7 +16,10 @@ On the VPS this repo is cloned to `/srv/wiki`, with the content in
 - `site/deploy/`: Dockerfile, compose, Apache/PHP config, and the deployment guide
 - `site/LocalSettings.php`: MediaWiki configuration; everything site-specific
   comes from `MW_*` environment variables
-- `site/extensions-custom/`: MenuSidebar (the flyout sidebar menu) and YouTubeTag
+- `site/extensions-custom/`: MenuSidebar (the flyout sidebar menu), YouTubeTag,
+  and DerethTheme (Citizen support: dark-mode colours for the templates,
+  wide-table scrolling, footer text; regenerate its `dark.css` with
+  `build-dark-css.py`)
 - `site/assets/`: logo and favicon
 - `site/scripts/`: the 1.41 → 1.43 upgrade and a page smoke-test
   (`site/scripts/check-pages.sh <base-url>`)
