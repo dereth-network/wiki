@@ -23,8 +23,8 @@ visitor ──HTTPS──▶ Cloudflare edge (TLS, cache, bot filtering)
 
 Why this setup, briefly:
 - **The public site can't change anything, even if it gets compromised.**
-  MediaWiki runs with `$wgReadOnly` set, and its database user only has
-  `SELECT`. Accounts that exist can log in, but they can't write.
+  MediaWiki runs with `$wgReadOnly` set, login and account creation are
+  switched off entirely, and its database user only has `SELECT`.
 - **Editing happens on the `admin` service**, which only listens on the VPS's
   loopback interface. Its login page never reaches the internet.
 - **Code is baked into the image.** The only mounts are the uploaded images and
@@ -73,7 +73,8 @@ destination", one of those three directories isn't owned by uid 33.
 cd /srv/wiki/site/deploy
 ./gen-env.sh          # writes .env with random DB passwords and secret key
 $EDITOR .env          # set DATA_DIR=/srv/wiki/data (leave CLOUDFLARE_TUNNEL_TOKEN empty)
-docker compose up -d --build
+docker compose build --pull   # --pull: always the latest PHP/MediaWiki patch build
+docker compose up -d
 docker compose logs -f db     # the first start imports the dump; wait for "ready for connections"
 ```
 

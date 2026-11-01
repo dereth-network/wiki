@@ -8,4 +8,6 @@
 
 # Secrets
 site/.secret_key
-site/deploy/.env
+# .env plus editor leftovers of it (.env~, .env.bak, ..env.swp) on the VPS clone
+site/deploy/*.env*
+!site/deploy/.env.example

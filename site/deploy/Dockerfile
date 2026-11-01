@@ -7,6 +7,14 @@
 # are the uploaded images (data/images) and a scratch cache volume.
 FROM docker.io/library/mediawiki:1.43.11
 
+# The official image's tags are rebuilt in place when PHP gets a security
+# release, so `build --pull` picks the fix up, but a plain `build` happily
+# reuses a stale cached copy. Refuse to build on a PHP older than the last
+# security release: 8.3.36 (2026-10-21) fixes CVE-2026-109618/109619,
+# unauthenticated RCE, exploited in the wild, worst under mod_php. Raise this
+# floor after each PHP security release.
+RUN php -r 'if (version_compare(PHP_VERSION, "8.3.36", "<")) { fwrite(STDERR, "PHP " . PHP_VERSION . " is older than 8.3.36; rebuild with --pull\n"); exit(1); }'
+
 # Non-bundled extensions, pinned to the exact REL1_43 commits the upgrade was
 # tested with (GitHub mirrors of gerrit.wikimedia.org).
 ARG VARIABLES_SHA=12ad832a68e1a002c821f5d1c127b04ac047181e
