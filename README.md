@@ -28,3 +28,16 @@ On the VPS this repo is cloned to `/srv/wiki`, with the content in
 
 Skins: legacy Vector is the default. Citizen (light/dark/auto) is installed
 for preview. Add `?useskin=citizen` to any page URL to try it.
+
+## License
+
+Everything in this repo is public domain ([Unlicense](LICENSE)): do
+whatever you want with it, no credit needed. Except:
+
+- `site/extensions-custom/MenuSidebar/`: a port of Wolfgang Stöttinger's
+  CSS MenuSidebar extension, GPL-2.0-or-later.
+- `site/extensions-custom/YouTubeTag/`: from the ACCPP release,
+  GPL-2.0-or-later.
+- `site/assets/`: the ACCPP logo and favicon, which belong to ACCPP.
+- The wiki's content (not in this repo) is CC BY-SA 3.0, and the game's
+  images belong to their owners.

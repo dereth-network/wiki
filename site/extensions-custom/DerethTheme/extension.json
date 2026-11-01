@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"author": "wiki.dereth.network",
 	"description": "Makes the ACCPP Wiki's templates work with the Citizen skin: dark-mode colours for their hard-coded light backgrounds, scrolling for over-wide layout tables, and the footer text.",
-	"license-name": "GPL-2.0-or-later",
+	"license-name": "Unlicense",
 	"type": "other",
 	"requires": {
 		"MediaWiki": ">= 1.43.0"
