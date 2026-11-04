@@ -126,3 +126,53 @@ Source: `accppwiki-docker-mediawiki-1.4x-offline` v1.0 (MediaWiki 1.41.0, PHP
   (for example *Killagurg's Arena*).
 - `Special:RecentChanges` is empty, because the import didn't populate
   `recentchanges`, and it returns HTTP 404 for that reason.
+
+# ACCPP offline release v1.1 (November 2026)
+
+v1.1 is `accppwiki-docker-mediawiki-1.46-offline-release-v1.1.7z`, the
+successor to the v1.0 this wiki was built from. It's mainly a software upgrade
+(MediaWiki 1.46.2, PHP 8.5.12, MariaDB 12.3.3). This wiki stays on 1.43 LTS and
+takes only the content change and one web server fix.
+
+## Content
+
+The only change from v1.0 is three links in `Template:News`, which
+`deploy/apply-content-v1.1.sh` applies. This was checked against the live wiki
+rather than taken from v1.1's changelog:
+
+- **Pages:** all 123,867 have the same id, title, latest revision and length,
+  except `Template:News`. v1.1 adds one revision, 345342.
+- **Files:** all 60,391 database rows match on name, size and SHA-1, and every
+  current file in v1.1's archive hashes to those values, with the three
+  exceptions below.
+- **Not compared:** the 57,828 archived file versions and tables other than
+  `page`, `revision` and `image`. v1.1's build script copies images from the
+  previous release, and its only new revision is the one above.
+
+Three files that disagree with their database rows, the same way on the live
+wiki and in v1.1, so these aren't v1.1 changes:
+
+- `File:Egg?.jpg` is stored on disk as `images/9/94/Egg_.jpg`, so the wiki
+  can't find it. To fix it on the VPS:
+  `sudo cp -n /srv/wiki/data/images/9/94/Egg_.jpg '/srv/wiki/data/images/9/94/Egg?.jpg'`
+- `File:Corsair's Arc Live.jpg` and
+  `File:Niarltah (Live Event Creature) Live.jpg` have the wrong size and hash
+  in the `image` table. The files serve fine, so these are harmless.
+
+## Software
+
+- **Taken:** v1.1's explicit list of what skips the clean-URL rewrite
+  (`deploy/apache-site.conf`).
+- **Not taken, already handled here:** the fixes for titles containing `?` and
+  for `/wiki/FAQ` showing MediaWiki's own FAQ file, and server-side thumbnails.
+- **Not taken, MediaWiki 1.46:** 1.46 is supported only to July 2027, while
+  1.43 LTS runs to December 2027. The next step is 1.47 LTS, due around
+  November 2026. See "Upgrading MediaWiki" in `deploy/README.md`.
+- **Not taken, on purpose:** `MaintenanceShell`, `DataDump`, `ImportDump` and
+  `CollapsibleVector`, which v1.1 keeps. v1.1 is also configured for
+  localhost: it publishes port 8080 on all interfaces, shows exception details
+  and uses a fixed database password. Don't run its stack on the VPS.
+
+`scripts/upgrade-local.sh` still needs v1.0's `docker/seed/`. v1.1's seed
+can't replace it, because its database is already on the 1.46 schema. To
+rebuild from v1.0, run the script, then make the `Template:News` edit.

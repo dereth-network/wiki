@@ -30,8 +30,7 @@ RUN set -eux; \
     mkdir /var/www/html; \
     mv /var/www/wiki /var/www/html/wiki; \
     cd /var/www/html/wiki; \
-    # Not needed on a live site, and the top-level text files (FAQ, INSTALL,
-    # README, ...) would otherwise shadow articles of the same name.
+    # Not needed on a live site.
     rm -rf mw-config tests docs \
         CODE_OF_CONDUCT.md COPYING CREDITS FAQ HISTORY INSTALL README.md \
         RELEASE-NOTES-* SECURITY UPGRADE composer.local.json-sample \

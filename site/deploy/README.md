@@ -223,8 +223,18 @@ To apply one, change the tag in `Dockerfile`
 (`image: dereth-wiki:1.43.N`), then deploy as above.
 
 1.43 is supported until about December 2027. Plan the move to the next LTS
-(1.47) before then. When you do, re-pin the three extensions in the
-`Dockerfile` to their `REL1_47` commits.
+(1.47) before then. When you do:
+
+- Re-pin the three extensions in the `Dockerfile` to their `REL1_47` commits,
+  and Citizen to a release that supports 1.47.
+- Port MenuSidebar and YouTubeTag. By 1.46 MediaWiki had removed
+  `wfUrlProtocols()` and the un-namespaced `Html`, `Parser` and `Title`
+  classes. ACCPP's v1.1 release patched its copies for this, so use those as
+  a reference.
+
+Don't import ACCPP's databases from v1.1 onwards to do this. Their schema is
+for 1.46 and can't go back to 1.43, and they'd overwrite any edits made here.
+See `../UPGRADE-NOTES.md`.
 
 MariaDB 11.4 LTS is supported until 2029. Bumping its patch version
 (`mariadb:11.4.N`) is safe at any time, and `MARIADB_AUTO_UPGRADE` handles
